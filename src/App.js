@@ -1,25 +1,27 @@
 import logo from './logo.svg';
+import chat_data1 from './data/message_1.json';
+import chat_data2 from './data/message_2.json';
+import { Pie } from 'react-chartjs-2';
+import { useState } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () => {
+
+  const [data, setData] = useState({
+    labels: ["Hi", "There"],
+    datasets: [{
+      data: [20, 30]
+    }]
+  });
+
+  return <>
+    <h1>Hello, World!</h1>
+    <div style={{
+      height: "300px",
+    }}>
+      <Pie data={data} />
     </div>
-  );
+  </>
 }
 
 export default App;
