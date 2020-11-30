@@ -1,25 +1,57 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import { ResponsivePie } from '@nivo/pie';
+import chat_data from './data/message_1.json';
 import './App.css';
 
-function App() {
+export default function App() {
+  const [chartData, setChartData] = useState(chat_data);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Hello, World!</h1>
+      <div style={{ height: "800px" }}>
+        <TotalContentChart data={chartData} />
+        <TotalMessagesChart data={chartData} />
+      </div>
+    </>
   );
 }
 
-export default App;
+const TotalContentChart = ({ data }) => {
+
+  const countTotalContentForSender = (senderName) => (
+    data.messages.reduce((total, m) => {
+      if (m.content && m.sender_name == senderName) {
+        return total + m.content.length;
+      }
+      return total;
+    }, 0)
+  );
+
+  let totals = data.participants.map(p => ({
+    id: p.name,
+    value: countTotalContentForSender(p.name),
+  }))
+
+  return <ResponsivePie
+    data={totals}
+  />
+}
+
+const TotalMessagesChart = ({ data }) => {
+
+  const countMessagesForSender = (senderName) => (
+    data.messages
+    .filter(m =>m.content && m.sender_name == senderName)
+    .length
+  );
+
+  let totals = data.participants.map(p => ({
+    id: p.name,
+    value: countMessagesForSender(p.name),
+  }))
+
+  return <ResponsivePie
+    data={totals}
+  />
+}
