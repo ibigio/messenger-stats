@@ -3,3 +3,12 @@
     color: rgba(153, 153, 153, 1);
     font-weight: 600;
 }
+
+.colorful {
+    background: linear-gradient(81.84deg, #0099ff -9.4%, #a033ff 51.57%, #ff5280 84.07%, #ff7061 90.59%);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  display: inline-block;
+  margin-bottom: 4px;
+}

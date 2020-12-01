@@ -2,32 +2,40 @@ import chat_data from './data/messages.json';
 import MyPie from './components/my_pie';
 import styles from './App.module.css';
 
-const totalBytesSent = name => (
+const names = chat_data.participants.map(p => p.name);
+const firstNames = names.map(n => n.split(' ')[0]);
+
+const totalBytesSent = names.map(name => (
   chat_data.messages
     .filter(m => m.content && m.sender_name === name)
     .reduce((total, m) => total + m.content.length, 0)
-);
+));
 
-const totalMessagesSent = name => (
+const totalMessagesSent = names.map(name => (
   chat_data.messages
     .filter(m => m.sender_name === name)
     .length
-);
+));
 
+const colorful = s => (
+<span className={styles.colorful}>{s}</span>
+);
 
 
 const App = () => {
 
   const data1 = {
+    units: totalMessagesSent.reduce((total, v) => total + v),
     title: "Messages Sent",
-    values: chat_data.participants.map(p => totalMessagesSent(p.name)),
-    labels: chat_data.participants.map(p => p.name)
+    values: totalMessagesSent,
+    labels: firstNames
   };
 
   const data2 = {
+    units: totalBytesSent.map(x => Math.round(x / 1000)).reduce((total, v) => total + v),
     title: "Kilobytes Sent",
-    values: chat_data.participants.map(p => Math.round(totalBytesSent(p.name) / 1000)),
-    labels: chat_data.participants.map(p => p.name)
+    values: totalBytesSent.map(x => Math.round(x / 1000)),
+    labels: firstNames
   };
 
   return <>
