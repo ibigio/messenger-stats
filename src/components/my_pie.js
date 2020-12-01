@@ -3,7 +3,7 @@ import styles from './my_pie.module.css';
 
 export default function MyPie({ data }) {
 
-    const { values, labels } = data;
+    const { title, values, labels } = data;
 
     const start1 = 100;
     const end1 = 250;
@@ -39,7 +39,7 @@ export default function MyPie({ data }) {
 
     return (
         <div>
-            <p className={styles.title}>Title</p>
+            <p className={styles.title}>{title}</p>
             <div>
                 <Pie data={dataFunc} options={options} />
             </div>
