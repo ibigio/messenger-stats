@@ -1,9 +1,13 @@
 import { Pie } from 'react-chartjs-2';
 import styles from './my_pie.module.css';
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
 export default function MyPie({ data }) {
 
-    const { title, values, labels } = data;
+    const { title, units, values, labels } = data;
 
     const start1 = 100;
     const end1 = 250;
@@ -39,7 +43,9 @@ export default function MyPie({ data }) {
 
     return (
         <div>
-            <p className={styles.title}>{title}</p>
+            <p className={styles.title}>
+                <div className={styles.colorful}>{numberWithCommas(units)}</div> <br/> {title}
+            </p>
             <div>
                 <Pie data={dataFunc} options={options} />
             </div>
