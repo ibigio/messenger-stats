@@ -1,15 +1,12 @@
 import { Pie } from 'react-chartjs-2';
 import styles from './my_pie.module.css';
-
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+import { numberWithCommas } from '../util';
 
 export default function MyPie({ data }) {
 
     const { title, units, values, labels } = data;
 
-    const start1 = 100;
+    const start1 = 0;
     const end1 = 250;
 
     const start2 = 200;
@@ -36,6 +33,8 @@ export default function MyPie({ data }) {
     };
 
     const options = {
+        responsive: true,
+        maintainAspectRatio: true,
         legend: {
             display: false
         }
@@ -44,7 +43,7 @@ export default function MyPie({ data }) {
     return (
         <div>
             <p className={styles.title}>
-                <div className={styles.colorful}>{numberWithCommas(units)}</div> <br/> {title}
+                <div className={styles.colorful}>{numberWithCommas(units)}</div> <br /> {title}
             </p>
             <div>
                 <Pie data={dataFunc} options={options} />

@@ -1,5 +1,6 @@
 .app_container {
-  padding: 0 200px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .header {
@@ -10,14 +11,15 @@
   font-size: 50px;
   text-align: center;
   margin: 30px auto;
-  padding-bottom: 80px;
+  margin-bottom: 80px;
 }
 
 .center {
   margin: 0 auto;
 }
 
-.grid {
+.grid1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  padding-bottom: 40px;
 }

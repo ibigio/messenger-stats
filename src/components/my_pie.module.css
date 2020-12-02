@@ -10,5 +10,10 @@
   color: transparent;
   font-weight: 800;
   display: inline-block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  font-size: 24px;
+}
+
+.chart_container {
+    background-color: #0099ff;
 }
