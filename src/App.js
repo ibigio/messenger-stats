@@ -71,6 +71,21 @@ const wordFreqs = name => {
     .reverse();
 };
 
+const wordEqs = (maxNum => {
+  const eqs = {};
+
+  let ilan = wordFreqs('Ilan Bigio');
+  let shelley = wordFreqs('Shelley Jain');
+
+  for (let i = 0; i < maxNum; i++) {
+    if (ilan[i].word === shelley[i].word) {
+      eqs[ilan[i].word] = true; 
+    }
+  }
+
+  return eqs;
+})(500);
+
 console.log(wordFreqs('Shelley Jain'));
 
 const totalMessagesSentData = {
@@ -114,10 +129,10 @@ const App = () => {
       <div className={styles.section}>
         <div className={styles.wordListGrid}>
           <div className={styles.wordListItem}>
-            <WordList wordFreqs={wordFreqs('Shelley Jain')} firstName={'Shelley'} />
+            <WordList wordFreqs={wordFreqs('Shelley Jain')} firstName={'Shelley'} eqs={wordEqs} />
           </div>
           <div className={styles.wordListItem}>
-            <WordList wordFreqs={wordFreqs('Ilan Bigio')} firstName={'Ilan'} />
+            <WordList wordFreqs={wordFreqs('Ilan Bigio')} firstName={'Ilan'} eqs={wordEqs} />
           </div>
         </div>
       </div>

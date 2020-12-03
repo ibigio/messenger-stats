@@ -15,6 +15,7 @@
 }
 
 .colorful {
+    padding-left: 8px;
 background: linear-gradient(81.84deg, #0099ff -50%, #a033ff 50%);
   -webkit-background-clip: text;
   color: transparent;
@@ -36,7 +37,6 @@ background: linear-gradient(81.84deg, #0099ff -50%, #a033ff 50%);
     }
 
 .word {
-    
     font-weight: 600;
     font-size: 16px;
     align-self: center;
@@ -65,4 +65,10 @@ background: linear-gradient(81.84deg, #0099ff -50%, #a033ff 50%);
     color: rgba(153, 153, 153, 1);
     font-weight: 600;
     margin-bottom: 16px;
+}
+
+.equal {
+    background: linear-gradient(81.84deg, #0099ff11 -9.4%, #a033ff11 51.57%, #ff528011 84.07%, #ff706111 90.59%);
+    border-radius: 10px;
+    padding: 2px 0;
 }
