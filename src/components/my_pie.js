@@ -1,6 +1,7 @@
 import { Pie } from 'react-chartjs-2';
 import styles from './my_pie.module.css';
 import { numberWithCommas } from '../util';
+import 'chartjs-plugin-deferred';
 
 export default function MyPie({ data }) {
 
@@ -37,6 +38,9 @@ export default function MyPie({ data }) {
         maintainAspectRatio: true,
         legend: {
             display: false
+        },
+        plugins: {
+            deferred: { yOffset: '80%' }
         }
     }
 

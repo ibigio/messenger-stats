@@ -1,8 +1,9 @@
 import chat_data from './data/messages.json';
 import MyPie from './components/my_pie';
 import MyLine from './components/my_line';
+import WordList from './components/word_list';
 import styles from './App.module.css';
-import { monthToSeason, getSeasonOf } from './util';
+import { getSeasonOf } from './util';
 
 const names = chat_data.participants.map(p => p.name);
 const firstNames = names.map(n => n.split(' ')[0]);
@@ -32,7 +33,7 @@ const messagesOverTime = (() => {
   let curCount = 0;
 
   dates.forEach(d => {
-    if (getSeasonOf(d) == curSeason) {
+    if (getSeasonOf(d) === curSeason) {
       curCount++;
     } else {
       seasons.push(curSeason);
@@ -51,9 +52,26 @@ const messagesOverTime = (() => {
   };
 })();
 
-const colorful = s => (
-  <span className={styles.colorful}>{s}</span>
-);
+const wordFreqs = name => {
+  const counts = {};
+
+  chat_data.messages
+    .filter(m => m.sender_name === name)
+    .filter(m => m.content)
+    .flatMap(m => m.content.split(' '))
+    .map(word => word.toLowerCase())
+    .forEach(word => {
+      counts[word] = counts[word] ? counts[word] + 1 : 1;
+    });
+
+  return Object
+    .keys(counts)
+    .map(word => ({ word: word, count: counts[word] }))
+    .sort((a, b) => a.count - b.count)
+    .reverse();
+};
+
+console.log(wordFreqs('Shelley Jain'));
 
 const totalMessagesSentData = {
   units: totalMessagesSent.reduce((total, v) => total + v),
@@ -70,8 +88,8 @@ const totalBytesSentData = {
 };
 
 const messagesOverTimeData = {
-  units: messagesOverTime.counts.length,
-  title: "Title",
+  units: "",
+  title: "Messages per Season",
   values: messagesOverTime.counts,
   labels: messagesOverTime.seasons,
 };
@@ -84,11 +102,25 @@ const App = () => {
       <div className={styles.center}>
         <h1 className={styles.header} >Shelley and Ilan's Messenger Shenanigans</h1>
       </div>
-      <div className={styles.grid1}>
-        <MyPie data={totalMessagesSentData} />
-        <MyPie data={totalBytesSentData} />
+      <div className={styles.section}>
+        <div className={styles.grid1}>
+          <MyPie data={totalMessagesSentData} />
+          <MyPie data={totalBytesSentData} />
+        </div>
       </div>
-      <MyLine data={messagesOverTimeData} />
+      <div className={styles.section}>
+        <MyLine data={messagesOverTimeData} />
+      </div>
+      <div className={styles.section}>
+        <div className={styles.wordListGrid}>
+          <div className={styles.wordListItem}>
+            <WordList wordFreqs={wordFreqs('Shelley Jain')} firstName={'Shelley'} />
+          </div>
+          <div className={styles.wordListItem}>
+            <WordList wordFreqs={wordFreqs('Ilan Bigio')} firstName={'Ilan'} />
+          </div>
+        </div>
+      </div>
 
     </div>
   </>
