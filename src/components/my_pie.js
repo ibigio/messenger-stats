@@ -45,7 +45,7 @@ export default function MyPie({ data }) {
     }
 
     return (
-        <div>
+        <div className={styles.pie_container}>
             <p className={styles.title}>
                 <div className={styles.colorful}>{numberWithCommas(units)}</div> <br /> {title}
             </p>

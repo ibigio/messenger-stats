@@ -1,12 +1,12 @@
 import styles from './word_list.module.css';
-import { numberWithCommas } from '../util';
+import { numberWithCommas, unpack } from '../util';
 
 const Entry = ({ word, count, index, isEqual }) => (
     <div>
         <div className={isEqual ? styles.equal : ''}>
             <div className={styles.grid}>
                 <span className={styles.colorful}>{index}.</span>
-                <span className={styles.word}> {word} </span>
+                <span className={styles.word}> {decodeURIComponent(escape(word))} </span>
                 <span className={styles.count} >{numberWithCommas(count)}</span>
             </div>
         </div>
@@ -16,6 +16,7 @@ const Entry = ({ word, count, index, isEqual }) => (
 
 const WordList = ({ wordFreqs, firstName, eqs }) => (
     <div>
+        {console.log(wordFreqs.slice(0, 50).map(wf => unpack(wf.word)))}
         <div className={styles.title}>
             <div className={styles.colorful2}>
                 {firstName}'s
