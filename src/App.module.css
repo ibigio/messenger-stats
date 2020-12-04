@@ -1,6 +1,7 @@
 .app_container {
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .header {
@@ -35,13 +36,13 @@
 
 .grid1 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   padding-bottom: 40px;
 }
 
 .wordListGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
 .wordListItem {
