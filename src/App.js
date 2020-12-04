@@ -226,6 +226,10 @@ const App = () => {
         <MyBar data={messagesPerHourData} />
       </div>
 
+      <div className={styles.comment}>
+        I was going to add more sections but I started this pretty last minute. Hope you enjoyed!
+      </div>
+
     </div>
   </>
 }
